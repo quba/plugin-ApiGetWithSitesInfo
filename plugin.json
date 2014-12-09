@@ -4,7 +4,7 @@
   "keywords": [],
   "license": "GPL v3+",
   "license_page": "http://www.gnu.org/licenses/gpl.html",
-  "description": "Add a new ApiWithSitesInfo output to also list the website name and main website URL.",
+  "description": "Modifies the 'API.get' output to also list the website name and main website URL",
   "theme": false,
   "require": {
     "piwik": ">=2.9.0"
