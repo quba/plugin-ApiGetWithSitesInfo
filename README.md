@@ -1,5 +1,8 @@
 # Piwik ApiGetWithSitesInfo Plugin
 
+
+[![Build Status](https://travis-ci.org/piwik/plugin-ApiGetWithSitesInfo.svg?branch=master)](https://travis-ci.org/piwik/plugin-ApiGetWithSitesInfo)
+
 ## Description
 
 Modifies the 'API.get' output to also list the website name and main website URL.
