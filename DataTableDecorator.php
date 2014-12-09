@@ -37,11 +37,11 @@ class DataTableDecorator extends \Piwik\Plugin
      */
     protected function decorateMapDataTable(Map $map)
     {
-        foreach ($map->getDataTables() as $idSite => &$table) {
+        foreach ($map->getDataTables() as $idSite => $table) {
             if ($table instanceof DataTable\Map) {
-                $table = $this->decorateMapDataTable($table);
+                $this->decorateMapDataTable($table);
             } else {
-                $table = $this->decorateDataTable($table);
+                $this->decorateDataTable($table);
             }
         }
         return $map;
