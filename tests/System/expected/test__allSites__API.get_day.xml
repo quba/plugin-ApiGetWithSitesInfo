@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<results>
+    <result idSite="1">
+        <idsite>1</idsite>
+        <site_url>http://piwik.net</site_url>
+        <site_name>Piwik test</site_name>
+        <nb_visits>2</nb_visits>
+        <nb_actions>4</nb_actions>
+        <revenue>2541</revenue>
+    </result>
+    <result idSite="2">
+        <idsite>2</idsite>
+        <site_url>http://second/website</site_url>
+        <site_name>Second website!</site_name>
+        <revenue>0</revenue>
+    </result>
+    <result idSite="3">
+        <idsite>3</idsite>
+        <site_url>http://third/website</site_url>
+        <site_name>Website N03 - with data</site_name>
+        <nb_visits>2</nb_visits>
+        <nb_actions>4</nb_actions>
+        <revenue>2541</revenue>
+    </result>
+    <result idSite="4">
+        <idsite>4</idsite>
+        <site_url>http://yet-another/site</site_url>
+        <site_name>Yet another site</site_name>
+        <revenue>0</revenue>
+    </result>
+</results>

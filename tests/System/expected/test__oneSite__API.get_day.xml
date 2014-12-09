@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<result>
+    <idsite>1</idsite>
+    <site_url>http://piwik.net</site_url>
+    <site_name>Piwik test</site_name>
+    <nb_visits>2</nb_visits>
+    <nb_actions>4</nb_actions>
+    <revenue>2541</revenue>
+</result>
