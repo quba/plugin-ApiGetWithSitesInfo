@@ -6,6 +6,7 @@
   "require": {
     "piwik": ">=2.9.0"
   },
+  "homepage": "http://github.com/piwik/piwik-ApiGetWithSitesInfo",
   "authors": [
     {
       "name": "Piwik",
