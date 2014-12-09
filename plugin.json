@@ -1,0 +1,16 @@
+{
+  "name": "ApiGetWithSitesInfo",
+  "version": "0.1.0",
+  "description": "Add a new ApiWithSitesInfo output to also list the website name and main website URL.",
+  "theme": false,
+  "require": {
+    "piwik": ">=2.9.0"
+  },
+  "authors": [
+    {
+      "name": "Piwik",
+      "email": "hello@piwik.org",
+      "homepage": "http://piwik.org"
+    }
+  ]
+}

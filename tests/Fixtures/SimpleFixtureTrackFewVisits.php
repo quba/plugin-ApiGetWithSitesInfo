@@ -1,0 +1,83 @@
+<?php
+/**
+ * Piwik - free/libre analytics platform
+ *
+ * @link    http://piwik.org
+ * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
+ */
+namespace Piwik\Plugins\ApiGetWithSitesInfo\tests\Fixtures;
+
+use Piwik\Date;
+use Piwik\Tests\Framework\Fixture;
+
+/**
+ * Generates tracker testing data for our ApiGetDecoratedTest
+ *
+ */
+class SimpleFixtureTrackFewVisits extends Fixture
+{
+    public $dateTime = '2013-01-23 01:23:45';
+    public $idSite = 1;
+
+    public function setUp()
+    {
+        $this->setUpWebsites();
+
+        $this->trackFirstVisit($this->idSite);
+        $this->trackSecondVisit($this->idSite);
+
+        $this->trackFirstVisit($this->idSite3);
+        $this->trackSecondVisit($this->idSite3);
+    }
+
+    private function setUpWebsites()
+    {
+        if (!self::siteCreated($this->idSite)) {
+            $idSite = self::createWebsite($this->dateTime, $ecommerce = 1);
+            $this->assertSame($this->idSite, $idSite);
+        }
+        $this->idSite2 = self::createWebsite($this->dateTime, $ecommerce = 1, "Second website!", array('http://second/website'));
+        $this->idSite3 = self::createWebsite($this->dateTime, $ecommerce = 1, "Website N03 - with data", array('http://third/website'));
+        $this->idSite4 = self::createWebsite($this->dateTime, $ecommerce = 1, "Yet another site", array('http://yet-another/site'));
+    }
+
+    protected function trackFirstVisit($idSite)
+    {
+        $t = self::getTracker($idSite, $this->dateTime, $defaultInit = true);
+
+        $t->setForceVisitDateTime(Date::factory($this->dateTime)->addHour(0.1)->getDatetime());
+        $t->setUrl('http://example.com/');
+        self::checkResponse($t->doTrackPageView('Viewing homepage'));
+
+        $t->setForceVisitDateTime(Date::factory($this->dateTime)->addHour(0.2)->getDatetime());
+        $t->setUrl('http://example.com/sub/page');
+        self::checkResponse($t->doTrackPageView('Second page view'));
+
+        $t->setForceVisitDateTime(Date::factory($this->dateTime)->addHour(0.25)->getDatetime());
+        $t->addEcommerceItem($sku = 'SKU_ID', $name = 'Test item!', $category = 'Test & Category', $price = 777, $quantity = 33);
+        self::checkResponse($t->doTrackEcommerceOrder('TestingOrder', $grandTotal = 33 * 77));
+    }
+
+    protected function trackSecondVisit($idSite)
+    {
+        $t = self::getTracker($idSite, $this->dateTime, $defaultInit = true);
+        $t->setIp('56.11.55.73');
+
+        $t->setForceVisitDateTime(Date::factory($this->dateTime)->addHour(0.1)->getDatetime());
+        $t->setUrl('http://example.com/sub/page');
+        self::checkResponse($t->doTrackPageView('Viewing homepage'));
+
+        $t->setForceVisitDateTime(Date::factory($this->dateTime)->addHour(0.2)->getDatetime());
+        $t->setUrl('http://example.com/?search=this is a site search query');
+        self::checkResponse($t->doTrackPageView('Site search query'));
+
+        $t->setForceVisitDateTime(Date::factory($this->dateTime)->addHour(0.3)->getDatetime());
+        $t->addEcommerceItem($sku = 'SKU_ID2', $name = 'A durable item', $category = 'Best seller', $price = 321);
+        self::checkResponse($t->doTrackEcommerceCartUpdate($grandTotal = 33 * 77));
+    }
+
+    public function tearDown()
+    {
+        // empty
+    }
+}
